@@ -23,7 +23,7 @@ const GlobalStyle = createGlobalStyle`
   	padding: 0;
   	border: 0;
   	font-size: 100%;
-  	font: inherit;
+    font: inherit;
   	vertical-align: baseline;
   }
   /* HTML5 display-role reset for older browsers */
@@ -33,6 +33,9 @@ const GlobalStyle = createGlobalStyle`
   }
   body {
   	line-height: 1;
+    font-family: 'League Gothic', sans-serif;
+    background-color: #d1d8e0;
+    
   }
   ol, ul {
   	list-style: none;
