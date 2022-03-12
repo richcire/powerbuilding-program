@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import { Routes, Route } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { motion } from "framer-motion";
+import DayBoard from "./DayBoard";
 
 const Block = styled.div`
   margin: 70px 30px;
@@ -9,7 +11,7 @@ const Block = styled.div`
   gap: 20px;
 `;
 
-const Day = styled.div`
+const Week = styled(motion.div)`
   width: 400px;
   height: 400px;
   background-color: red;
@@ -25,36 +27,37 @@ const Overlay = styled.div`
   opacity: 1;
 `;
 
-const MainBoard = styled.div`
-  width: 600px;
-  height: 600px;
-  background-color: yellow;
-`;
-
 function Level1() {
   const [isBoard, setIsBoard] = useState(false);
-  const onOverlayCLick = () => setIsBoard((prev) => !prev);
+  const navigate = useNavigate();
+  const onOverlayCLick = () => {
+    setIsBoard((prev) => !prev);
+    navigate(-1);
+  };
+  const onWeekClick = () => setIsBoard((prev) => !prev);
   return (
     <>
       <Block>
-        <Day onClick={onOverlayCLick}></Day>
-        <Day></Day>
-        <Day></Day>
-        <Day></Day>
-        <Day></Day>
-        <Day></Day>
+        <Link to="week1">
+          <Week onClick={onWeekClick} layoutId="week1"></Week>
+        </Link>
+        <Week></Week>
+        <Week></Week>
+        <Week></Week>
+        <Week></Week>
+        <Week></Week>
       </Block>
       <Block>
-        <Day></Day>
-        <Day></Day>
-        <Day></Day>
-        <Day></Day>
-        <Day></Day>
-        <Day></Day>
+        <Week></Week>
+        <Week></Week>
+        <Week></Week>
+        <Week></Week>
+        <Week></Week>
+        <Week></Week>
       </Block>
       {isBoard ? (
         <Overlay onClick={onOverlayCLick}>
-          <MainBoard />
+          <DayBoard lid="week1" />
         </Overlay>
       ) : null}
     </>
