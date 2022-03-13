@@ -1,29 +1,140 @@
-export const data = {
+export interface IExercise {
+  name: string;
+  set: number;
+  weight: number;
+  rir: number;
+  reps: number[];
+  totvol: number;
+}
+
+export interface IDataSmaple {
+  1: {
+    week1: {
+      day1?: IExercise[];
+      day2?: IExercise[];
+      day3?: IExercise[];
+      day4?: IExercise[];
+      day5?: IExercise[];
+      day6?: IExercise[];
+    };
+    week2: {
+      day1?: IExercise[];
+      day2?: IExercise[];
+      day3?: IExercise[];
+      day4?: IExercise[];
+      day5?: IExercise[];
+      day6?: IExercise[];
+    };
+    week3: {
+      day1?: IExercise[];
+      day2?: IExercise[];
+      day3?: IExercise[];
+      day4?: IExercise[];
+      day5?: IExercise[];
+      day6?: IExercise[];
+    };
+    week4: {
+      day1?: IExercise[];
+      day2?: IExercise[];
+      day3?: IExercise[];
+      day4?: IExercise[];
+      day5?: IExercise[];
+      day6?: IExercise[];
+    };
+    week5: {
+      day1?: IExercise[];
+      day2?: IExercise[];
+      day3?: IExercise[];
+      day4?: IExercise[];
+      day5?: IExercise[];
+      day6?: IExercise[];
+    };
+    week6: {
+      day1?: IExercise[];
+      day2?: IExercise[];
+      day3?: IExercise[];
+      day4?: IExercise[];
+      day5?: IExercise[];
+      day6?: IExercise[];
+    };
+  };
+}
+export const dataSample: IDataSmaple = {
   1: {
     week1: {
       day1: [
         {
-          name: null,
-          set: null,
-          weight: null,
-          rir: null,
-          reps: [],
-          totvol: null,
-          totvolsum: null,
+          name: "shrug",
+          set: 3,
+          weight: 10,
+          rir: 1,
+          reps: [12, 12, 12],
+          totvol: 100,
+        },
+        {
+          name: "benchpress",
+          set: 3,
+          weight: 10,
+          rir: 1,
+          reps: [12, 12, 12],
+          totvol: 100,
         },
       ],
-      day2: {},
-      day3: {},
-      day4: {},
-      day5: {},
-      day6: {},
+      day2: [
+        {
+          name: "shrug1",
+          set: 3,
+          weight: 10,
+          rir: 1,
+          reps: [12, 12, 12],
+          totvol: 100,
+        },
+      ],
+      day3: [
+        {
+          name: "shrug2",
+          set: 3,
+          weight: 10,
+          rir: 1,
+          reps: [12, 12, 12],
+          totvol: 100,
+        },
+      ],
+      day4: [
+        {
+          name: "shrug3",
+          set: 3,
+          weight: 10,
+          rir: 1,
+          reps: [12, 12, 12],
+          totvol: 100,
+        },
+      ],
+      day5: [
+        {
+          name: "shrug4",
+          set: 3,
+          weight: 10,
+          rir: 1,
+          reps: [12, 12, 12],
+          totvol: 100,
+        },
+      ],
+      day6: [
+        {
+          name: "shru5",
+          set: 3,
+          weight: 10,
+          rir: 1,
+          reps: [12, 12, 12],
+          totvol: 100,
+        },
+      ],
     },
-    week2: { day1: {}, day2: {}, day3: {}, day4: {}, day5: {}, day6: {} },
-    week3: { day1: {}, day2: {}, day3: {}, day4: {}, day5: {}, day6: {} },
-    week4: { day1: {}, day2: {}, day3: {}, day4: {}, day5: {}, day6: {} },
-    week5: { day1: {}, day2: {}, day3: {}, day4: {}, day5: {}, day6: {} },
-    week6: { day1: {}, day2: {}, day3: {}, day4: {}, day5: {}, day6: {} },
+    week2: {},
+    week3: {},
+    week4: {},
+    week5: {},
+    week6: {},
   },
-  1.5: {},
-  2: {},
 };
