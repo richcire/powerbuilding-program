@@ -12,8 +12,17 @@ const MainBoard = styled(motion.div)`
   grid-template-columns: repeat(3, 1fr);
 `;
 
-const Day = styled.div``;
+const Day = styled.div`
+  border: 2px solid black;
+`;
 
+const Title = styled.div`
+  padding: 15px;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 interface IDayBoard {
   lid: string;
 }
@@ -24,21 +33,19 @@ function DayBoard({ lid }: IDayBoard) {
     "*": "week1" | "week2" | "week3" | "week4" | "week5" | "week6";
   }>();
 
-  console.log(location.pathname.includes("level1"));
   if (location.pathname.includes("level1")) {
     return (
       <MainBoard layoutId={lid}>
         {weekNum
           ? Object.values(dataSample[1][weekNum]).map((day, index) => (
               <Day key={index}>
-                <div>hello</div>
+                <Title>DAY {index + 1}</Title>
                 {day.map((unit, index) => (
                   <Row
                     key={index}
                     name={unit.name}
                     set={unit.set}
                     weight={unit.weight}
-                    rir={unit.rir}
                     reps={unit.reps}
                     totvol={unit.totvol}
                   >

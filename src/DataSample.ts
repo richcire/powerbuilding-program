@@ -2,7 +2,6 @@ export interface IExercise {
   name: string;
   set: number;
   weight: number;
-  rir: number;
   reps: number[];
   totvol: number;
 }
@@ -67,7 +66,6 @@ export const dataSample: IDataSmaple = {
           name: "shrug",
           set: 3,
           weight: 10,
-          rir: 1,
           reps: [12, 12, 12],
           totvol: 100,
         },
@@ -75,7 +73,6 @@ export const dataSample: IDataSmaple = {
           name: "benchpress",
           set: 3,
           weight: 10,
-          rir: 1,
           reps: [12, 12, 12],
           totvol: 100,
         },
@@ -85,7 +82,6 @@ export const dataSample: IDataSmaple = {
           name: "shrug1",
           set: 3,
           weight: 10,
-          rir: 1,
           reps: [12, 12, 12],
           totvol: 100,
         },
@@ -95,7 +91,6 @@ export const dataSample: IDataSmaple = {
           name: "shrug2",
           set: 3,
           weight: 10,
-          rir: 1,
           reps: [12, 12, 12],
           totvol: 100,
         },
@@ -105,7 +100,6 @@ export const dataSample: IDataSmaple = {
           name: "shrug3",
           set: 3,
           weight: 10,
-          rir: 1,
           reps: [12, 12, 12],
           totvol: 100,
         },
@@ -115,7 +109,6 @@ export const dataSample: IDataSmaple = {
           name: "shrug4",
           set: 3,
           weight: 10,
-          rir: 1,
           reps: [12, 12, 12],
           totvol: 100,
         },
@@ -125,7 +118,6 @@ export const dataSample: IDataSmaple = {
           name: "shru5",
           set: 3,
           weight: 10,
-          rir: 1,
           reps: [12, 12, 12],
           totvol: 100,
         },
