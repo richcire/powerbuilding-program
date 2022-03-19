@@ -1,4 +1,4 @@
-export interface IExercise {
+interface IExercise {
   name: string;
   set: number;
   weight: number;
@@ -6,9 +6,9 @@ export interface IExercise {
   totvol: number;
 }
 
-export interface IDataSmaple {
+interface IDataSmaple {
   1: {
-    week1: {
+    week1?: {
       day1?: IExercise[];
       day2?: IExercise[];
       day3?: IExercise[];
@@ -16,7 +16,7 @@ export interface IDataSmaple {
       day5?: IExercise[];
       day6?: IExercise[];
     };
-    week2: {
+    week2?: {
       day1?: IExercise[];
       day2?: IExercise[];
       day3?: IExercise[];
@@ -24,7 +24,7 @@ export interface IDataSmaple {
       day5?: IExercise[];
       day6?: IExercise[];
     };
-    week3: {
+    week3?: {
       day1?: IExercise[];
       day2?: IExercise[];
       day3?: IExercise[];
@@ -32,7 +32,7 @@ export interface IDataSmaple {
       day5?: IExercise[];
       day6?: IExercise[];
     };
-    week4: {
+    week4?: {
       day1?: IExercise[];
       day2?: IExercise[];
       day3?: IExercise[];
@@ -40,7 +40,7 @@ export interface IDataSmaple {
       day5?: IExercise[];
       day6?: IExercise[];
     };
-    week5: {
+    week5?: {
       day1?: IExercise[];
       day2?: IExercise[];
       day3?: IExercise[];
@@ -48,7 +48,7 @@ export interface IDataSmaple {
       day5?: IExercise[];
       day6?: IExercise[];
     };
-    week6: {
+    week6?: {
       day1?: IExercise[];
       day2?: IExercise[];
       day3?: IExercise[];

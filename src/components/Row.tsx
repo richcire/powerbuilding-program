@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { IExercise } from "../DataSample";
 
 const Line = styled.div`
   display: flex;
@@ -34,8 +33,8 @@ function Row({ name, set, weight, reps, totvol }: IRow) {
       <Name>{name}</Name>
       <SingleNumber>{set}</SingleNumber>
       <SingleNumber>{weight}</SingleNumber>
-      {reps.map((rep) => (
-        <Room>{rep}</Room>
+      {reps.map((rep, index) => (
+        <Room key={index}>{rep}</Room>
       ))}
       <SingleNumber>{totvol}</SingleNumber>
     </Line>
