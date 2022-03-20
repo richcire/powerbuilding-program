@@ -17,7 +17,7 @@ interface IWeek {
   day6?: IExercise[];
 }
 
-interface ILevel {
+export interface ILevel {
   week1?: IWeek;
   week2?: IWeek;
   week3?: IWeek;

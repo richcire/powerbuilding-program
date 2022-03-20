@@ -19,7 +19,6 @@ const Room = styled.span`
   width: 20px;
 `;
 interface IRow {
-  children: string;
   name: string;
   set: number;
   weight: number;

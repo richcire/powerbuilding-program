@@ -1,5 +1,5 @@
 function Level2() {
-  return null;
+  return <div>level2</div>;
 }
 
 export default Level2;

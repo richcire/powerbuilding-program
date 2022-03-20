@@ -13,7 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/level1/*" element={<Level1 />} />
-        <Route path="/levle1half" element={<Level1half />} />
+        <Route path="/level1half" element={<Level1half />} />
         <Route path="/level2" element={<Level2 />} />
       </Routes>
     </BrowserRouter>
