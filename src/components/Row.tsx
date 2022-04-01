@@ -25,7 +25,7 @@ interface IRow {
   reps: number[];
   totvol: number;
 }
-
+//change to input area
 function Row({ name, set, weight, reps, totvol }: IRow) {
   return (
     <Line>
