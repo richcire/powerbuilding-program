@@ -28,15 +28,15 @@ export interface ILevel {
 
 export interface IData {
   1: ILevel;
+  1.5: ILevel;
   2: ILevel;
-  3: ILevel;
 }
 
 export const dataState = atom<IData>({
   key: "data",
   default: {
     1: {},
+    1.5: {},
     2: {},
-    3: {},
   },
 });

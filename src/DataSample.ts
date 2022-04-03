@@ -1,4 +1,4 @@
-interface IExercise {
+export interface IExercise {
   name: string;
   set: number;
   weight: number;

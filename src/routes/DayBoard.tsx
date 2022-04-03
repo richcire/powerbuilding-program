@@ -5,7 +5,7 @@ import Row from "../components/Row";
 import { dataSample } from "../DataSample";
 import { collection, getDocs, doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase-config";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import Day from "../components/Day";
 import { useRecoilState } from "recoil";
 import { dataState, IData, ILevel } from "../atoms";
@@ -47,6 +47,11 @@ function DayBoard({ lid }: IDayBoard) {
   const docRef = doc(db, levelIndex, Level1ID);
   const [levelDataState, setLevelDataState] = useRecoilState(dataState);
 
+  const handleChildElementClick = (e: React.MouseEvent<HTMLElement>) => {
+    e.stopPropagation();
+    // Do other stuff here
+  };
+
   const getData = async () => {
     const docSnap = await getDoc(docRef);
     const snapshot = docSnap.data() as ILevel;
@@ -60,47 +65,14 @@ function DayBoard({ lid }: IDayBoard) {
   useEffect(() => {
     getData();
   }, []);
-  // const { "*": weekNum } = useParams<{
-  //   "*": "week1" | "week2" | "week3" | "week4" | "week5" | "week6" | undefined;
-  // }>();
+
   return (
-    <MainBoard>
+    <MainBoard onClick={handleChildElementClick}>
       {dayList.map((day) => (
-        <Day key={day} dayIndex={day}></Day>
+        <Day key={day} dayIndex={day} levelIndex={levelIndexNum}></Day>
       ))}
     </MainBoard>
   );
-  // if (location.pathname.includes("level1")) {
-  //   return (
-  //     <MainBoard layoutId={lid}>
-  //       {weekNum
-  //         ? Object.values(dataSample[1][weekNum]).map((day, index) => (
-  //             <Day key={index}>
-  //               <Title>DAY {index + 1}</Title>
-  //               {day.map((unit, index) => (
-  //                 <Row
-  //                   key={index}
-  //                   name={unit.name}
-  //                   set={unit.set}
-  //                   weight={unit.weight}
-  //                   reps={unit.reps}
-  //                   totvol={unit.totvol}
-  //                 >
-  //                   {unit.name}
-  //                 </Row>
-  //               ))}
-  //             </Day>
-  //           ))
-  //         : null}
-  //     </MainBoard>
-  //   );
-  // } else if (location.pathname.includes("level1half")) {
-  //   return null;
-  // } else if (location.pathname.includes("level2")) {
-  //   return null;
-  // } else {
-  //   return null;
-  // }
 }
 
 export default DayBoard;

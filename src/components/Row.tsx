@@ -1,6 +1,7 @@
+import React, { useState } from "react";
 import styled from "styled-components";
 
-const Line = styled.div`
+const Line = styled.form`
   display: flex;
   padding: 15px;
   gap: 20px;
@@ -8,7 +9,7 @@ const Line = styled.div`
   border-top: 1px solid black;
 `;
 
-const Name = styled.div`
+const Name = styled.input`
   width: 60px;
 `;
 
@@ -18,6 +19,9 @@ const SingleNumber = styled.div`
 const Room = styled.span`
   width: 20px;
 `;
+
+const SubmitBtn = styled.button``;
+
 interface IRow {
   name: string;
   set: number;
@@ -27,15 +31,44 @@ interface IRow {
 }
 //change to input area
 function Row({ name, set, weight, reps, totvol }: IRow) {
+  const exerciseReset: IRow = {
+    name,
+    set,
+    weight,
+    reps,
+    totvol,
+  };
+
+  const [exercise, setExercise] = useState<IRow>(exerciseReset);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    area: "name" | "set" | "weight" | "reps" | "totvol"
+  ) => {
+    console.log("fix this function for various inputs below");
+  };
+
   return (
-    <Line>
-      <Name>{name}</Name>
+    <Line onSubmit={handleSubmit}>
+      <Name
+        value={exercise.name}
+        onChange={(e) =>
+          setExercise((prev) => {
+            return { ...prev, name: e.target.value };
+          })
+        }
+      />
       <SingleNumber>{set}</SingleNumber>
       <SingleNumber>{weight}</SingleNumber>
       {reps.map((rep, index) => (
         <Room key={index}>{rep}</Room>
       ))}
       <SingleNumber>{totvol}</SingleNumber>
+      <SubmitBtn>Submit</SubmitBtn>
     </Line>
   );
 }
