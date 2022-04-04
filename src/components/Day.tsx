@@ -18,8 +18,8 @@ interface IDay {
 
 function Day({ dayIndex, levelIndex }: IDay) {
   const [levelDataState, setLevelDataState] = useRecoilState(dataState);
+
   const location = useLocation();
-  //const [garbage, levelIndex, weekIndex] = location.pathname.split("/");
   const wIndex = location.pathname.split("/")[2] as
     | "week1"
     | "week2"
@@ -61,6 +61,7 @@ function Day({ dayIndex, levelIndex }: IDay) {
       {levelDataState[1][wIndex]?.[dayIndex]?.map((element, index) => (
         <Row
           key={index}
+          order={index}
           name={element.name}
           set={element.set}
           weight={element.weight}
