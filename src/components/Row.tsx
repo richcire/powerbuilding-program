@@ -6,7 +6,7 @@ import styled from "styled-components";
 import { dataState } from "../atoms";
 import { IExercise } from "../DataSample";
 import { db } from "../firebase-config";
-import { getDocId, levelIndexToNum } from "../utils";
+import { calculateTotVol, getDocId, levelIndexToNum } from "../utils";
 
 const Line = styled.form`
   display: flex;
@@ -31,6 +31,9 @@ const SingleNumber = styled.input`
 const Room = styled.input`
   background-color: transparent;
   width: 20px;
+  &: hover {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
 `;
 
 const TotVol = styled.div`
@@ -81,12 +84,15 @@ function Row({ order, dayIndex, name, set, weight, reps, totvol }: IRow) {
   const [preWeight, setPreWeight] = useState<number>(weight);
   const [preReps, setPreReps] = useState<number[]>(reps);
   const levelIndexNum = levelIndexToNum(levelIndex);
+  const preTotVol = calculateTotVol(preWeight, preReps);
   //preName doesnt change
+
   useEffect(() => {
     setPreName(name);
     setPreSet(set);
     setPreReps(reps);
   }, [name]);
+
   const wIndex = location.pathname.split("/")[2] as weekIndex;
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -98,7 +104,7 @@ function Row({ order, dayIndex, name, set, weight, reps, totvol }: IRow) {
       set: preSet,
       weight: preWeight,
       reps: preReps,
-      totvol: totvol,
+      totvol: preTotVol,
     };
     const newExerciseArray = targetDay ? [...targetDay] : [exercise];
     newExerciseArray[order] = exercise;
@@ -125,8 +131,7 @@ function Row({ order, dayIndex, name, set, weight, reps, totvol }: IRow) {
     const targetDay = levelDataState[levelIndexNum][wIndex]?.[dayIndex];
 
     const newExerciseArray = targetDay ? [...targetDay] : [];
-
-    const removed = newExerciseArray.splice(order, 1);
+    newExerciseArray.splice(order, 1);
     console.log(newExerciseArray);
     const field = wIndex + "." + dayIndex;
     setLevelDataState((prev) => {
@@ -151,6 +156,8 @@ function Row({ order, dayIndex, name, set, weight, reps, totvol }: IRow) {
   };
   const handleSetChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPreSet(Number(e.target.value));
+    setPreReps(Array.from({ length: preSet }, (v, i) => 0));
+    console.log(preReps);
   };
   const handleWeightChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPreWeight(Number(e.target.value));
@@ -164,19 +171,21 @@ function Row({ order, dayIndex, name, set, weight, reps, totvol }: IRow) {
     setPreReps(repsCopy);
   };
 
+  const arr = Array.from({ length: preSet }, () => 0);
+
   return (
     <Line onSubmit={handleSubmit}>
       <Name value={preName} onChange={handleNameChange} />
       <SingleNumber value={preSet} onChange={handleSetChange} />
       <SingleNumber value={preWeight} onChange={handleWeightChange} />
-      {preReps.map((rep, index) => (
+      {arr.map((rep, index) => (
         <Room
           key={index}
-          value={rep}
+          value={preReps[index]}
           onChange={(event) => handleRepsChange(event, index)}
         />
       ))}
-      <TotVol>{totvol}</TotVol>
+      <TotVol>{preTotVol}</TotVol>
       <SubmitBtn type="submit">Submit</SubmitBtn>
       <DeleteBtn type="button" onClick={deleteRow}>
         -

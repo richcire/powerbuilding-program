@@ -4,16 +4,18 @@ import { dataState } from "../atoms";
 import styled from "styled-components";
 import Row from "./Row";
 import { IExercise } from "../DataSample";
+import { useState } from "react";
 
 const Square = styled.div`
   border: 2px solid black;
-  text-align: center;
 `;
 
-const AddRowBtn = styled.button`
+const AddRowBtn = styled.button<{ max: boolean }>`
+  display: ${(props) => (props.max ? "none" : "block")};
+
   background-color: transparent;
-  margin-top: 10px;
   width: 80px;
+  margin: 0 auto;
   padding: 10px;
   font-size: 25px;
   &: hover {
@@ -34,6 +36,9 @@ interface IDay {
 
 function Day({ dayIndex, levelIndex }: IDay) {
   const [levelDataState, setLevelDataState] = useRecoilState(dataState);
+  const [isMax, setIsMax] = useState(true);
+
+  //handle when roW is max
 
   const location = useLocation();
   const wIndex = location.pathname.split("/")[2] as
@@ -86,7 +91,9 @@ function Day({ dayIndex, levelIndex }: IDay) {
         ></Row>
       ))}
       <Line />
-      <AddRowBtn onClick={onAddClick}>+</AddRowBtn>
+      <AddRowBtn max={false} onClick={onAddClick}>
+        +
+      </AddRowBtn>
     </Square>
   );
 }
