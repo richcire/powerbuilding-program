@@ -1,5 +1,5 @@
 import { doc, updateDoc } from "@firebase/firestore";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
@@ -82,6 +82,11 @@ function Row({ order, dayIndex, name, set, weight, reps, totvol }: IRow) {
   const [preReps, setPreReps] = useState<number[]>(reps);
   const levelIndexNum = levelIndexToNum(levelIndex);
   //preName doesnt change
+  useEffect(() => {
+    setPreName(name);
+    setPreSet(set);
+    setPreReps(reps);
+  }, [name]);
   const wIndex = location.pathname.split("/")[2] as weekIndex;
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
