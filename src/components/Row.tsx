@@ -1,9 +1,9 @@
 import { doc, updateDoc } from "@firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import styled from "styled-components";
-import { dataState } from "../atoms";
+import { dataState, isRowMax } from "../atoms";
 import { IExercise } from "../DataSample";
 import { db } from "../firebase-config";
 import { calculateTotVol, getDocId, levelIndexToNum } from "../utils";
@@ -16,6 +16,7 @@ const Line = styled.form`
   align-items: center;
   border-top: 1px solid black;
   font-size: 20px;
+  height: 7%;
 `;
 
 const Name = styled.input`
@@ -87,6 +88,8 @@ function Row({ order, dayIndex, name, set, weight, reps, totvol }: IRow) {
   const preTotVol = calculateTotVol(preWeight, preReps);
   //preName doesnt change
 
+  const setIsMax = useSetRecoilState(isRowMax);
+
   useEffect(() => {
     setPreName(name);
     setPreSet(set);
@@ -129,6 +132,9 @@ function Row({ order, dayIndex, name, set, weight, reps, totvol }: IRow) {
 
   const deleteRow = async () => {
     const targetDay = levelDataState[levelIndexNum][wIndex]?.[dayIndex];
+
+    const isTargetDayMax = targetDay?.length === 6 ? true : false;
+    setIsMax(isTargetDayMax);
 
     const newExerciseArray = targetDay ? [...targetDay] : [];
     newExerciseArray.splice(order, 1);

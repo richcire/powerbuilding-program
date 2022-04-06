@@ -40,3 +40,8 @@ export const dataState = atom<IData>({
     2: {},
   },
 });
+
+export const isRowMax = atom<boolean>({
+  key: "isRowMax",
+  default: false,
+});

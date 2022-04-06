@@ -1,16 +1,16 @@
 import { useLocation } from "react-router";
 import { useRecoilState } from "recoil";
-import { dataState } from "../atoms";
+import { dataState, isRowMax } from "../atoms";
 import styled from "styled-components";
 import Row from "./Row";
 import { IExercise } from "../DataSample";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Square = styled.div`
   border: 2px solid black;
 `;
 
-const AddRowBtn = styled.button<{ max: boolean }>`
+const AddRowBtn = styled.button<{ max: number }>`
   display: ${(props) => (props.max ? "none" : "block")};
 
   background-color: transparent;
@@ -36,7 +36,7 @@ interface IDay {
 
 function Day({ dayIndex, levelIndex }: IDay) {
   const [levelDataState, setLevelDataState] = useRecoilState(dataState);
-  const [isMax, setIsMax] = useState(true);
+  const [isMax, setIsMax] = useRecoilState(isRowMax);
 
   //handle when roW is max
 
@@ -51,6 +51,7 @@ function Day({ dayIndex, levelIndex }: IDay) {
 
   const onAddClick = () => {
     let targetDay = levelDataState[levelIndex][wIndex]?.[dayIndex];
+
     const newExercise: IExercise = {
       name: "",
       set: 0,
@@ -62,6 +63,9 @@ function Day({ dayIndex, levelIndex }: IDay) {
     const newExerciseArray = targetDay
       ? [...targetDay, newExercise]
       : [newExercise];
+
+    const isTargetDayMax = targetDay?.length === 6 ? true : false;
+    setIsMax(isTargetDayMax);
 
     setLevelDataState((prev) => {
       return {
@@ -76,6 +80,7 @@ function Day({ dayIndex, levelIndex }: IDay) {
       };
     });
   };
+
   return (
     <Square>
       {levelDataState[1][wIndex]?.[dayIndex]?.map((element, index) => (
@@ -91,7 +96,7 @@ function Day({ dayIndex, levelIndex }: IDay) {
         ></Row>
       ))}
       <Line />
-      <AddRowBtn max={false} onClick={onAddClick}>
+      <AddRowBtn max={isMax ? 1 : 0} onClick={onAddClick}>
         +
       </AddRowBtn>
     </Square>
