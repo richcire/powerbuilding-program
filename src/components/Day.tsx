@@ -1,6 +1,6 @@
 import { useLocation } from "react-router";
 import { useRecoilState } from "recoil";
-import { dataState, isRowMax } from "../atoms";
+import { dataState } from "../atoms";
 import styled from "styled-components";
 import Row from "./Row";
 import { IExercise } from "../DataSample";
@@ -36,10 +36,16 @@ interface IDay {
 
 function Day({ dayIndex, levelIndex }: IDay) {
   const [levelDataState, setLevelDataState] = useRecoilState(dataState);
-  const [isMax, setIsMax] = useRecoilState(isRowMax);
+  const [isMax, setIsMax] = useState(false);
 
+  const deleteHandler = () => setIsMax(false);
   //handle when roW is max
 
+  useEffect(() => {
+    let targetDay = levelDataState[levelIndex][wIndex]?.[dayIndex];
+    const isTargetDayMax = targetDay?.length === 7 ? true : false;
+    setIsMax(isTargetDayMax);
+  }, []);
   const location = useLocation();
   const wIndex = location.pathname.split("/")[2] as
     | "week1"
@@ -52,6 +58,9 @@ function Day({ dayIndex, levelIndex }: IDay) {
   const onAddClick = () => {
     let targetDay = levelDataState[levelIndex][wIndex]?.[dayIndex];
 
+    const isTargetDayMax = targetDay?.length === 6 ? true : false;
+    setIsMax(isTargetDayMax);
+
     const newExercise: IExercise = {
       name: "",
       set: 0,
@@ -63,9 +72,6 @@ function Day({ dayIndex, levelIndex }: IDay) {
     const newExerciseArray = targetDay
       ? [...targetDay, newExercise]
       : [newExercise];
-
-    const isTargetDayMax = targetDay?.length === 6 ? true : false;
-    setIsMax(isTargetDayMax);
 
     setLevelDataState((prev) => {
       return {
@@ -93,6 +99,7 @@ function Day({ dayIndex, levelIndex }: IDay) {
           weight={element.weight}
           reps={element.reps}
           totvol={element.totvol}
+          deleteHandler={deleteHandler}
         ></Row>
       ))}
       <Line />

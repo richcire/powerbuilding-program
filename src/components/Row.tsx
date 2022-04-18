@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import styled from "styled-components";
-import { dataState, isRowMax } from "../atoms";
+import { dataState } from "../atoms";
 import { IExercise } from "../DataSample";
 import { db } from "../firebase-config";
 import { calculateTotVol, getDocId, levelIndexToNum } from "../utils";
@@ -70,9 +70,19 @@ interface IRow {
   weight: number;
   reps: number[];
   totvol: number;
+  deleteHandler: () => void;
 }
 //change to input area
-function Row({ order, dayIndex, name, set, weight, reps, totvol }: IRow) {
+function Row({
+  order,
+  dayIndex,
+  name,
+  set,
+  weight,
+  reps,
+  totvol,
+  deleteHandler,
+}: IRow) {
   const location = useLocation();
   const levelIndex = location.pathname.split("/")[1];
 
@@ -87,8 +97,6 @@ function Row({ order, dayIndex, name, set, weight, reps, totvol }: IRow) {
   const levelIndexNum = levelIndexToNum(levelIndex);
   const preTotVol = calculateTotVol(preWeight, preReps);
   //preName doesnt change
-
-  const setIsMax = useSetRecoilState(isRowMax);
 
   useEffect(() => {
     setPreName(name);
@@ -134,11 +142,9 @@ function Row({ order, dayIndex, name, set, weight, reps, totvol }: IRow) {
     const targetDay = levelDataState[levelIndexNum][wIndex]?.[dayIndex];
 
     const isTargetDayMax = targetDay?.length === 6 ? true : false;
-    setIsMax(isTargetDayMax);
 
     const newExerciseArray = targetDay ? [...targetDay] : [];
     newExerciseArray.splice(order, 1);
-    console.log(newExerciseArray);
     const field = wIndex + "." + dayIndex;
     setLevelDataState((prev) => {
       return {
@@ -152,6 +158,7 @@ function Row({ order, dayIndex, name, set, weight, reps, totvol }: IRow) {
         },
       };
     });
+    deleteHandler();
     await updateDoc(docRef, {
       [field]: newExerciseArray,
     });
