@@ -18,9 +18,9 @@ const MainBoard = styled(motion.div)`
   grid-template-rows: 1fr 1fr;
 `;
 
-interface IDayBoard {
-  lid: string;
-}
+// interface IDayBoard {
+//   lid: string;
+// }
 
 const dayList: ("day1" | "day2" | "day3" | "day4" | "day5" | "day6")[] = [
   "day1",
@@ -31,7 +31,7 @@ const dayList: ("day1" | "day2" | "day3" | "day4" | "day5" | "day6")[] = [
   "day6",
 ];
 
-function DayBoard({ lid }: IDayBoard) {
+function DayBoard() {
   const location = useLocation();
   const [, levelIndex, weekIndex] = location.pathname.split("/");
   const levelIndexNum = levelIndexToNum(levelIndex);

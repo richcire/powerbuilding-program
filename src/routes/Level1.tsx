@@ -8,11 +8,12 @@ import DayBoard from "./DayBoard";
 const Block = styled.div`
   margin: 70px 30px;
   display: flex;
+  justify-content: space-between;
   gap: 20px;
 `;
 
 const Week = styled(motion.div)`
-  width: 400px;
+  width: 270px;
   height: 400px;
   background-color: #353b48;
   border-radius: 20px;
@@ -38,17 +39,24 @@ function Level1() {
     navigate(-1);
   };
   const onWeekClick = () => setIsBoard((prev) => !prev);
+
+  const wIndexList = [1, 2, 3, 4, 5, 6];
   return (
     <>
       <Block>
-        <Link to="week1">
+        {wIndexList.map((wIndex) => (
+          <Link to={`week${wIndex}`} key={wIndex}>
+            <Week onClick={onWeekClick}></Week>
+          </Link>
+        ))}
+        {/* <Link to="week1">
           <Week onClick={onWeekClick} layoutId="week1"></Week>
         </Link>
         <Week></Week>
         <Week></Week>
         <Week></Week>
         <Week></Week>
-        <Week></Week>
+        <Week></Week> */}
       </Block>
       <Block>
         <Week></Week>
@@ -64,7 +72,7 @@ function Level1() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
-          <DayBoard lid="week1" />
+          <DayBoard />
         </Overlay>
       ) : null}
     </>
