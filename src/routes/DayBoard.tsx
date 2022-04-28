@@ -40,7 +40,6 @@ function DayBoard() {
 
   const handleChildElementClick = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation();
-    // Do other stuff here
   };
 
   const getData = async () => {

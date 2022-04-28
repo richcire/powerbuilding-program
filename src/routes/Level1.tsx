@@ -1,10 +1,11 @@
 import styled from "styled-components";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import DayBoard from "./DayBoard";
 import { useRecoilValue } from "recoil";
 import { dataState } from "../atoms";
+import { levelIndexToNum } from "../utils";
 
 const Block = styled.div`
   margin: 70px 30px;
@@ -42,9 +43,12 @@ const WeekIndexTitle = styled.div`
   margin-top: 20px;
   font-size: 50px;
 `;
+
 type weekIndex = "week1" | "week2" | "week3" | "week4" | "week5" | "week6";
 
 function Level1() {
+  const location = useLocation();
+  const levelIndex = levelIndexToNum(location.pathname.slice(1));
   const [isBoard, setIsBoard] = useState(false);
   const levelDataState = useRecoilValue(dataState);
 
@@ -56,7 +60,7 @@ function Level1() {
   const onWeekClick = () => setIsBoard((prev) => !prev);
 
   function weekTotVal(wIndex: weekIndex) {
-    const weekData = levelDataState[1][wIndex] ?? [];
+    const weekData = levelDataState[levelIndex][wIndex] ?? [];
     let sum = 0;
     for (const value of Object.values(weekData)) {
       value.forEach((exercise: { totvol: number }) => {
@@ -82,22 +86,6 @@ function Level1() {
             </Week>
           </Link>
         ))}
-        {/* <Link to="week1">
-          <Week onClick={onWeekClick} layoutId="week1"></Week>
-        </Link>
-        <Week></Week>
-        <Week></Week>
-        <Week></Week>
-        <Week></Week>
-        <Week></Week> */}
-      </Block>
-      <Block>
-        <Week></Week>
-        <Week></Week>
-        <Week></Week>
-        <Week></Week>
-        <Week></Week>
-        <Week></Week>
       </Block>
       {isBoard ? (
         <Overlay
