@@ -42,19 +42,19 @@ function DayBoard() {
     e.stopPropagation();
   };
 
-  const getData = async () => {
-    const docSnap = await getDoc(docRef);
-    const snapshot = docSnap.data() as ILevel;
-    setLevelDataState((prev) => {
-      return {
-        ...prev,
-        [levelIndexNum]: snapshot,
-      };
-    });
-  };
-  useEffect(() => {
-    getData();
-  }, []);
+  // const getData = async () => {
+  //   const docSnap = await getDoc(docRef);
+  //   const snapshot = docSnap.data() as ILevel;
+  //   setLevelDataState((prev) => {
+  //     return {
+  //       ...prev,
+  //       [levelIndexNum]: snapshot,
+  //     };
+  //   });
+  // };
+  // useEffect(() => {
+  //   getData();
+  // }, []);
 
   return (
     <MainBoard onClick={handleChildElementClick}>

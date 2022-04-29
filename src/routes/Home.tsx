@@ -40,14 +40,17 @@ function Home() {
 
   const getData = async () => {
     const docRefLv1 = doc(db, "level1", getDocId("level1"));
-    const docRefLv15 = doc(db, "level1.5", getDocId("levelhalf"));
-    const docRefLv2 = doc(db, "level2", getDocId("level2"));
+    const docRefLv15 = doc(db, "level1half", getDocId("level1half"));
+    const docRefLv2 = doc(db, "levle2", getDocId("level2"));
     const docSnap1 = await getDoc(docRefLv1);
+
     const docSnap15 = await getDoc(docRefLv15);
+
     const docSnap2 = await getDoc(docRefLv2);
     const snapshot1 = docSnap1.data() as ILevel;
     const snapshot15 = docSnap15.data() as ILevel;
     const snapshot2 = docSnap2.data() as ILevel;
+
     setLevelDataState((prev) => {
       return {
         ...prev,
@@ -57,7 +60,7 @@ function Home() {
       };
     });
   };
-
+  console.log(levelDataState);
   useEffect(() => {
     getData();
   }, []);

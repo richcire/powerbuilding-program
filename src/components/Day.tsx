@@ -89,7 +89,7 @@ function Day({ dayIndex, levelIndex }: IDay) {
 
   return (
     <Square>
-      {levelDataState[1][wIndex]?.[dayIndex]?.map((element, index) => (
+      {levelDataState[levelIndex][wIndex]?.[dayIndex]?.map((element, index) => (
         <Row
           key={index}
           order={index}

@@ -1,5 +1,7 @@
+import Block from "../components/Block";
+
 function Level2() {
-  return <div>level2</div>;
+  return <Block levelIndex={2} />;
 }
 
 export default Level2;
