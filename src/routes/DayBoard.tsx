@@ -18,10 +18,6 @@ const MainBoard = styled(motion.div)`
   grid-template-rows: 1fr 1fr;
 `;
 
-// interface IDayBoard {
-//   lid: string;
-// }
-
 const dayList: ("day1" | "day2" | "day3" | "day4" | "day5" | "day6")[] = [
   "day1",
   "day2",
@@ -41,20 +37,6 @@ function DayBoard() {
   const handleChildElementClick = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation();
   };
-
-  // const getData = async () => {
-  //   const docSnap = await getDoc(docRef);
-  //   const snapshot = docSnap.data() as ILevel;
-  //   setLevelDataState((prev) => {
-  //     return {
-  //       ...prev,
-  //       [levelIndexNum]: snapshot,
-  //     };
-  //   });
-  // };
-  // useEffect(() => {
-  //   getData();
-  // }, []);
 
   return (
     <MainBoard onClick={handleChildElementClick}>

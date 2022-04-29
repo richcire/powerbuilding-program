@@ -11,7 +11,7 @@ const Row = styled.div`
   display: flex;
   justify-content: center;
 `;
-const Card = styled.div`
+const Card = styled(Link)`
   width: 440px;
   height: 500px;
   margin: 100px;
@@ -26,6 +26,7 @@ const Card = styled.div`
   background-color: #353b48;
   color: #dcdde1;
   box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.5);
+  text-decoration: none;
 `;
 
 const Block = styled.div``;
@@ -60,31 +61,27 @@ function Home() {
       };
     });
   };
-  console.log(levelDataState);
+
   useEffect(() => {
     getData();
   }, []);
 
   return (
     <Row>
-      <Link style={{ textDecoration: "none" }} to="level1">
-        <Card>
-          <Block>Block1 : 100</Block>
-          <Label>Level 1</Label>
-        </Card>
-      </Link>
-      <Link style={{ textDecoration: "none" }} to="level1half">
-        <Card>
-          <Block>Block1 : 100</Block>
-          <Label>Level 1.5</Label>
-        </Card>
-      </Link>
-      <Link style={{ textDecoration: "none" }} to="level2">
-        <Card>
-          <Block>Block1 : 100</Block>
-          <Label>Level 2</Label>
-        </Card>
-      </Link>
+      <Card to="level1">
+        <Block>Block1 : 100</Block>
+        <Label>Level 1</Label>
+      </Card>
+
+      <Card to="level1half">
+        <Block>Block1 : 100</Block>
+        <Label>Level 1.5</Label>
+      </Card>
+
+      <Card to="level2">
+        <Block>Block1 : 100</Block>
+        <Label>Level 2</Label>
+      </Card>
     </Row>
   );
 }

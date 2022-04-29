@@ -62,7 +62,6 @@ function Block({ levelIndex }: IBlock) {
     setIsBoard((prev) => !prev);
     navigate(-1);
   };
-  console.log(levelDataState);
   function weekTotVal(wIndex: weekIndex) {
     const weekData = levelDataState[levelIndex][wIndex] ?? [];
     let sum = 0;
